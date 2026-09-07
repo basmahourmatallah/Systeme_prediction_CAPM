@@ -6,3 +6,6 @@ __pycache__/
 *.log
 # Dataset
 data/
+notebooks/models_final/
+notebooks/models_final_smotenc/
+models/random_forest_capm.pkl
