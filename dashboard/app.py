@@ -47,17 +47,21 @@ def nettoyer_produit(val):
     return retirer_accents(val)
 
 # ─── CHARGEMENT DES ARTEFACTS (chemins corrigés avec ../) ───
+import pathlib
+
+# Chemin absolu du dossier où se trouve ce script (dashboard/), peu importe d'où il est lancé
+DOSSIER_APP = pathlib.Path(__file__).parent
+DOSSIER_MODELS = DOSSIER_APP.parent / "models"
+
 @st.cache_resource
 def charger_artefacts():
-    pipeline = joblib.load("../models/pipeline_randomforest_smotenc.pkl")
-    colonnes_features = joblib.load("../models/colonnes_features.pkl")
-    produits_frequents = joblib.load("../models/liste_produits_frequents.pkl")
-    valeurs_categorielles = joblib.load("../models/valeurs_categorielles.pkl")
-    synonymes = joblib.load("../models/synonymes_produits.pkl")
-    seuil_optimal = joblib.load("../models/seuil_optimal_severe.pkl")
+    pipeline = joblib.load(DOSSIER_MODELS / "pipeline_randomforest_smotenc.pkl")
+    colonnes_features = joblib.load(DOSSIER_MODELS / "colonnes_features.pkl")
+    produits_frequents = joblib.load(DOSSIER_MODELS / "liste_produits_frequents.pkl")
+    valeurs_categorielles = joblib.load(DOSSIER_MODELS / "valeurs_categorielles.pkl")
+    synonymes = joblib.load(DOSSIER_MODELS / "synonymes_produits.pkl")
+    seuil_optimal = joblib.load(DOSSIER_MODELS / "seuil_optimal_severe.pkl")
     return pipeline, colonnes_features, produits_frequents, valeurs_categorielles, synonymes, seuil_optimal
-
-pipeline, colonnes_features, produits_frequents, valeurs_categorielles, synonymes, seuil_optimal = charger_artefacts()
 
 def regrouper_produit(val):
     val = nettoyer_produit(val)
@@ -68,7 +72,9 @@ if "historique" not in st.session_state:
     st.session_state.historique = []
 
 # ─── EN-TÊTE AVEC LOGO ───
-def _logo_base64(path="assets/logo_capm.jpg"):
+def _logo_base64(path=None):
+    if path is None:
+        path = DOSSIER_APP / "assets" / "logo_capm.jpg"
     if os.path.exists(path):
         with open(path, "rb") as f:
             return base64.b64encode(f.read()).decode()
