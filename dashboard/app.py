@@ -46,7 +46,7 @@ def nettoyer_produit(val):
     val = re.sub(r'\s+', ' ', val)
     return retirer_accents(val)
 
-# ─── CHARGEMENT DES ARTEFACTS (chemins corrigés avec ../) ───
+# ─── CHARGEMENT DES ARTEFACTS ───
 import pathlib
 
 # Chemin absolu du dossier où se trouve ce script (dashboard/), peu importe d'où il est lancé
@@ -55,18 +55,6 @@ DOSSIER_MODELS = DOSSIER_APP.parent / "models"
 
 @st.cache_resource
 def charger_artefacts():
-  try:
-    artefacts = charger_artefacts()
-    pipeline = artefacts[0]
-    colonnes_features = artefacts[1]
-    produits_frequents = artefacts[2]
-    valeurs_categorielles = artefacts[3]
-    synonymes = artefacts[4]
-    seuil_optimal = artefacts[5]
-  except Exception as e:
-    st.error("Erreur lors du chargement des artefacts du modèle :")
-    st.exception(e)
-    st.stop()
     pipeline = joblib.load(DOSSIER_MODELS / "pipeline_randomforest_smotenc.pkl")
     colonnes_features = joblib.load(DOSSIER_MODELS / "colonnes_features.pkl")
     produits_frequents = joblib.load(DOSSIER_MODELS / "liste_produits_frequents.pkl")
@@ -74,6 +62,13 @@ def charger_artefacts():
     synonymes = joblib.load(DOSSIER_MODELS / "synonymes_produits.pkl")
     seuil_optimal = joblib.load(DOSSIER_MODELS / "seuil_optimal_severe.pkl")
     return pipeline, colonnes_features, produits_frequents, valeurs_categorielles, synonymes, seuil_optimal
+
+try:
+    pipeline, colonnes_features, produits_frequents, valeurs_categorielles, synonymes, seuil_optimal = charger_artefacts()
+except Exception as e:
+    st.error("Erreur lors du chargement des artefacts du modèle :")
+    st.exception(e)
+    st.stop()
 
 def regrouper_produit(val):
     val = nettoyer_produit(val)
@@ -153,7 +148,7 @@ with tab_prediction:
     with col_g:
         age = st.number_input("Âge (années)", min_value=0, max_value=110, value=25)
         sexe = st.selectbox("Sexe", valeurs_categorielles["Sexe"])
-        milieu = st.selectbox("Milieu", valeurs_categorielles["Milieu"])
+        milieu = st.selectbox("Milieu", valeurs_categorielles# ─── CHARGEMENT DES ARTEFACTS (chemins corrigés avec ../) ───["Milieu"])
         region = st.selectbox("Région", valeurs_categorielles["Région"])
         circonstance = st.selectbox("Circonstance", valeurs_categorielles["Circonstance"])
 
