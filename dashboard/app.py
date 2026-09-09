@@ -148,7 +148,7 @@ with tab_prediction:
     with col_g:
         age = st.number_input("Âge (années)", min_value=0, max_value=110, value=25)
         sexe = st.selectbox("Sexe", valeurs_categorielles["Sexe"])
-        milieu = st.selectbox("Milieu", valeurs_categorielles)# ─── CHARGEMENT DES ARTEFACTS (chemins corrigés avec ../) ───["Milieu"])
+        milieu = st.selectbox("Milieu", valeurs_categorielles["Milieu"])
         region = st.selectbox("Région", valeurs_categorielles["Région"])
         circonstance = st.selectbox("Circonstance", valeurs_categorielles["Circonstance"])
 
