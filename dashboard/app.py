@@ -114,10 +114,15 @@ with tab_accueil:
         st.markdown("""<div class="glow-card"><h4>Objectif</h4>
             <p>Prédire automatiquement la <b>gravité d'une intoxication</b> pour appuyer la décision clinique du personnel du CAPM.</p></div>""", unsafe_allow_html=True)
     with col_b:
-        st.markdown(f"""<div class="glow-card"><h4>Modèle utilisé</h4>
-            <p>Pipeline <b>SMOTENC + Random Forest</b> : le rééquilibrage respecte la nature catégorielle des variables
-            (contrairement à SMOTE classique qui interpole des colonnes one-hot). Grades 3 et 4 fusionnés en <b>« Sévère »</b>.
-            Seuil de décision optimal calibré à {seuil_optimal:.2f} (maximise le F2-score sur la classe Sévère).</p></div>""", unsafe_allow_html=True)
+        texte_seuil = f"Seuil de décision optimal calibré à {seuil_optimal:.2f} (maximise le F2-score sur la classe Sévère)."
+        html_modele = (
+            '<div class="glow-card"><h4>Modèle utilisé</h4>'
+            '<p>Pipeline <b>SMOTENC + Random Forest</b> : le rééquilibrage respecte la nature catégorielle des variables '
+            '(contrairement à SMOTE classique qui interpole des colonnes one-hot). Grades 3 et 4 fusionnés en <b>« Sévère »</b>. '
+            + texte_seuil +
+            '</p></div>'
+        )
+        st.markdown(html_modele, unsafe_allow_html=True)
 
     st.markdown("<div style='height:30px'></div>", unsafe_allow_html=True)
     data_pss = {
