@@ -55,6 +55,12 @@ DOSSIER_MODELS = DOSSIER_APP.parent / "models"
 
 @st.cache_resource
 def charger_artefacts():
+    try:
+    pipeline, colonnes_features, produits_frequents, valeurs_categorielles, synonymes, seuil_optimal = charger_artefacts()
+    except Exception as e:
+    st.error("Erreur lors du chargement des artefacts du modèle :")
+    st.exception(e)
+    st.stop()
     pipeline = joblib.load(DOSSIER_MODELS / "pipeline_randomforest_smotenc.pkl")
     colonnes_features = joblib.load(DOSSIER_MODELS / "colonnes_features.pkl")
     produits_frequents = joblib.load(DOSSIER_MODELS / "liste_produits_frequents.pkl")
