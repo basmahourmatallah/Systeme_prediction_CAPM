@@ -55,9 +55,9 @@ DOSSIER_MODELS = DOSSIER_APP.parent / "models"
 
 @st.cache_resource
 def charger_artefacts():
-    try:
+   try:
     pipeline, colonnes_features, produits_frequents, valeurs_categorielles, synonymes, seuil_optimal = charger_artefacts()
-    except Exception as e:
+except Exception as e:
     st.error("Erreur lors du chargement des artefacts du modèle :")
     st.exception(e)
     st.stop()
