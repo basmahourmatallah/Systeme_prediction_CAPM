@@ -2,8 +2,9 @@
 
 Projet de fin d'année (PFA) — INSEA.
 
-🔗 **Application** : [intoxicationprediction.streamlit.app](https://intoxicationprediction.streamlit.app/)
-📄 **Rapport complet** : [`rapport/Rapport_PFA.pdf`](./rapport/Rapport_PFA.pdf)
+ **Application** : [intoxicationprediction.streamlit.app](https://intoxicationprediction.streamlit.app/)
+ 
+ **Rapport complet** : [`rapport/Rapport_PFA.pdf`](./rapport/Rapport_PFA.pdf)
 
 ## Objectif
 
