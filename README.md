@@ -18,7 +18,6 @@ décision clinique du personnel médical.
 - `dashboard/` : application Streamlit (interface de prédiction)
 - `models/` : modèle final entraîné et artefacts associés
 - `src/` : fonctions réutilisables (prétraitement, entraînement)
-- `data/` : données brutes et traitées (non versionnées, confidentielles)
 
 ## Modèle final
 
