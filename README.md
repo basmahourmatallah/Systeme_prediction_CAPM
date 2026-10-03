@@ -1,4 +1,4 @@
-# Système d'aide à la décision — Prédiction de la gravité des intoxications (CAPM)
+# Système d'aide à la décision : Prédiction de la gravité des intoxications (CAPM)
 
 Projet de fin d'année (PFA) — INSEA.
 
